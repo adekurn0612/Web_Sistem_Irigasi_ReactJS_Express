@@ -6,6 +6,7 @@ import { handleGetDataLahanDuaKalium, handleGetDataLahanDuaKelembapan, handleGet
 import { handleGetDataLahanTigaKalium, handleGetDataLahanTigaNitrogen, handleGetDataLahanTigaPh, handleGetDataLahanTigaPotasium } from './dataLahanTigaSaga';
 import { handleGetDataLahanEmpatKalium, handleGetDataLahanEmpatKelembapan, handleGetDataLahanEmpatNitrogen, handleGetDataLahanEmpatPh, handleGetDataLahanEmpatPotasium } from './dataLahanEmpatSaga';
 import { handleGetDatabaruLahanDua, handleGetDatabaruLahanEmpat, handleGetDatabaruLahanSatu, handleGetDatabaruLahanTiga } from './dataBaruSaga';
+import { handleLogin } from './loginSaga';
 
 
 function* watchAll(){
@@ -42,6 +43,8 @@ function* watchAll(){
         takeEvery(ActionType.DATA_BARU_LAHAN_DUA,handleGetDatabaruLahanDua),
         takeEvery(ActionType.DATA_BARU_LAHAN_TIGA,handleGetDatabaruLahanTiga),
         takeEvery(ActionType.DATA_BARU_LAHAN_EMPAT,handleGetDatabaruLahanEmpat),
+
+        takeEvery(ActionType.LOGIN,handleLogin),
     ])
 }
 

@@ -177,7 +177,8 @@ const dataKelembapanLahanEmpatBaru =()=>{
 }
 
 const login =(data)=>{
-    return axios.post('login' , data)
+    console.log(data)
+    return axios.post('user/login' , data)
 }
 
 //baruu

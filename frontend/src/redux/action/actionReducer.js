@@ -278,6 +278,7 @@ export const resGetLahanEmpatkelembapan=(payload)=>{
 }
 
 export const reqLogin=(payload)=>{
+    console.log('login',payload)
     return{
         type : ActionType.LOGIN,
         payload
