@@ -12,3 +12,6 @@
 
 
 -semua api yanng ada di file router di server bisa dipakai
+login : 
+username : admin
+password : admin
