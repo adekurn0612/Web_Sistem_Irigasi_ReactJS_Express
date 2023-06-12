@@ -1,0 +1,14 @@
+
+-untuk menjalankan resource ini hal pertama adalah mengimport database di directory database
+-pastikan sudah menginsatall nodejs
+-selanjutnya masuk ke server dan front end dan jalankan "npm i" pada terminal di directory masing masing,
+-setelah manjalankan program jalankan "npm start" di masing masing directory
+
+//hal hal yang perlu di perhatikan
+-file .env di server
+-file ini digunakan untuk menghubungkan server ke database silahkan diubah sesuai dengan konfigurasi database masing masing
+-dile endpoint di dalam directory front end
+-digunakan untu kmenghubungkan front end ke server.
+
+
+-semua api yanng ada di file router di server bisa dipakai
