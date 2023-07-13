@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { reqGetAll } from '../../redux/action/actionReducer';
 
@@ -11,11 +11,53 @@ const TabelData = () => {
     dispatch(reqGetAll());
   }, [refresh]);
 
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  const handleStartDateChange = (datetime) => {
+    setStartDate(datetime);
+  };
+
+  const handleEndDateChange = (datetime) => {
+    setEndDate(datetime);
+  };
+
   return (
+    <>
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div className="overflow-hidden">
+              <div className="flex justify-end">
+              <div className="flex -center">
+      <div classnName="mr-2">
+        <label htmlFor="start-date">Start Date:</label>
+        <input
+          type="datetime-local"
+          id="start-date"
+          value={startDate}
+          onChange={handleStartDateChange}
+        />
+      </div>
+      <div className="mr-2">
+        <label htmlFor="end-date">End Date:</label>
+        <input
+          type="datetime-local"
+          id="end-date"
+          value={endDate}
+          onChange={handleEndDateChange}
+        />
+      </div>
+    </div>
+                <button
+                  className="flex bg-blue-700 hover:bg-purple-500 text-white font-bold py-1 px-2 rounded-full">
+                  Download
+                </button>
+                <button
+                  className="flex bg-blue-700 hover:bg-purple-500 text-white font-bold py-1 px-2 rounded-full">
+                  Delete
+                </button>
+              </div>
             <table className="min-w-full text-left text-sm font-light">
               <thead className="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
                 <tr>
@@ -67,7 +109,8 @@ const TabelData = () => {
         </div>
       </div>
     </div>
-  );
+    </>
+  );           
 };
 
 export default TabelData;
