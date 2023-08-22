@@ -14,6 +14,8 @@ import DataBaruLahanSatuReduce from "../reducer/dataBaruLahanSatuReducer";
 import DataBaruLahanDuaReduce from "../reducer/dataBaruLahanDua";
 import DataBaruLahanEmpatReduce from "../reducer/dataBaruLahanEmpat";
 import DataBaruLahanTigaReduce from "../reducer/dataBaruLahanTIga";
+import DeleteReduce from "../reducer/delete";
+import ExcelReduce from "../reducer/excel";
 
 const logger = createLogger();
 const saga = createSagaMiddleware();
@@ -29,7 +31,9 @@ const reducer = combineReducers({
   dataBaruLahanSatuReducer : DataBaruLahanSatuReduce,
   dataBaruLahanDuaReducer : DataBaruLahanDuaReduce,
   dataBaruLahanTigaReducer : DataBaruLahanTigaReduce,
-  dataBaruLahanEmpatReducer : DataBaruLahanEmpatReduce
+  dataBaruLahanEmpatReducer : DataBaruLahanEmpatReduce,
+  deleteReducer : DeleteReduce,
+  excelReducer : ExcelReduce
 });
 
 const Store = configureStore({

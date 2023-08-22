@@ -2,7 +2,8 @@
 import { forwardRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {MdCottage} from "react-icons/md"
-import { BsFillBarChartFill, BsFillDatabaseFill} from "react-icons/bs";
+import { BsFillBarChartFill, BsFillDatabaseFill , } from "react-icons/bs";
+import { HiOutlineLogout } from "react-icons/hi";
 
 const SideBar = forwardRef(({showNav}, ref) => {
       const {pathname} = useLocation();
@@ -18,6 +19,14 @@ const SideBar = forwardRef(({showNav}, ref) => {
 
 
   ];
+
+  const handleLogout = () => {
+    // Lakukan proses logout di sini (misalnya, menghapus token atau sesi)
+    // Contoh: panggil fungsi atau aksi untuk melakukan log out pada server
+
+    // Setelah logout, bisa diarahkan kembali ke halaman login atau beranda
+    // Contoh: window.location.href = '/login';
+  };
 
   return (
     <div ref={ref} className="fixed w-56 h-full bg-fuchsia-50 shadow-sm">
@@ -44,11 +53,20 @@ const SideBar = forwardRef(({showNav}, ref) => {
                 {mn.icon}
             </div>
             <div>
-              <p>{mn.name}</p>
+              <p>{mn.name}</p>  
             </div>
           </div>
         </Link>
 ))}
+ <button
+          onClick={handleLogout}
+          className=" py-3 mx-10 rounded-md text-center cursor-pointer mb-3 flex items-center justify-center transition-colors text-gray-400 hover:bg-blue-500 bg-blue-100"
+        >
+          <div className="flex items-center">
+            <HiOutlineLogout className="mr-2" />
+            <p className="m-0">Log Out</p>
+          </div>
+        </button>
       </div>
     </div>
   );

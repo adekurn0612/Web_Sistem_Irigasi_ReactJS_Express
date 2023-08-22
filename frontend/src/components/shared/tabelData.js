@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { reqGetAll } from '../../redux/action/actionReducer';
+import { reqExcel, reqGetAll, reqdelete } from '../../redux/action/actionReducer';
 
 const TabelData = () => {
   const { data, message, refresh } = useSelector((state) => state.dataReducer);
@@ -13,15 +13,40 @@ const TabelData = () => {
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-
-  const handleStartDateChange = (datetime) => {
-    setStartDate(datetime);
+ 
+  const handleStartDateChange = (event) => {
+    setStartDate(event.target.value);
   };
 
-  const handleEndDateChange = (datetime) => {
-    setEndDate(datetime);
+  const handleEndDateChange = (event) => {
+    setEndDate(event.target.value);
   };
 
+  const formatDateToCustom = (dateString) => {
+    const [year, day, month] = dateString.split('-');
+    return `${year}-${day}-${month}`;
+  };
+
+  const formatDateToInput = (formattedDate) => {
+    const [year, day, month] = formattedDate.split('-');
+    return `${year}-${month}-${day}`;
+  };
+
+  const handleDownload = (event) => {
+    event.preventDefault();
+    if (startDate && endDate) {
+      const awal = formatDateToCustom(startDate);
+      const akhir = formatDateToCustom(endDate);
+      dispatch(reqExcel(awal, akhir));
+    } else {
+      console.log('Please select both start and end dates.');
+    }
+  };
+
+  const handleDelete = (event)=>{
+    dispatch(reqdelete())
+  }
+  
   return (
     <>
     <div className="flex flex-col">
@@ -33,7 +58,7 @@ const TabelData = () => {
       <div classnName="mr-2">
         <label htmlFor="start-date">Start Date:</label>
         <input
-          type="datetime-local"
+          type="date"
           id="start-date"
           value={startDate}
           onChange={handleStartDateChange}
@@ -42,18 +67,18 @@ const TabelData = () => {
       <div className="mr-2">
         <label htmlFor="end-date">End Date:</label>
         <input
-          type="datetime-local"
+          type="date"
           id="end-date"
           value={endDate}
           onChange={handleEndDateChange}
         />
       </div>
     </div>
-                <button
+                <button onClick={handleDownload}
                   className="flex bg-blue-700 hover:bg-purple-500 text-white font-bold py-1 px-2 rounded-full">
                   Download
                 </button>
-                <button
+                <button onClick={handleDelete}
                   className="flex bg-blue-700 hover:bg-purple-500 text-white font-bold py-1 px-2 rounded-full">
                   Delete
                 </button>
@@ -88,22 +113,31 @@ const TabelData = () => {
                 </tr>
               </thead>
               <tbody>
-                {data.map((item, index) => (
-                  <tr
-                    key={index}
-                    className={index % 2 === 0 ? "bg-neutral-100 dark:bg-neutral-700" : "bg-white dark:bg-neutral-600"}
-                  >
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">{index + 1}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{item.nama}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{item.sensor_p}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{item.sensor_ph}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{item.sensor_k}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{item.sensor_n}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{item.sensor_kelembaban}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{item.timestamp}</td>
-                  </tr>
-                ))}
-              </tbody>
+  {data && data.length > 0 ? (
+    data.map((item, index) => (
+      <tr
+        key={index}
+        className={index % 2 === 0 ? "bg-neutral-100 dark:bg-neutral-700" : "bg-white dark:bg-neutral-600"}
+      >
+        <td className="whitespace-nowrap px-6 py-4 font-medium">{index + 1}</td>
+        <td className="whitespace-nowrap px-6 py-4">{item.nama}</td>
+        <td className="whitespace-nowrap px-6 py-4">{item.sensor_p}</td>
+        <td className="whitespace-nowrap px-6 py-4">{item.sensor_ph}</td>
+        <td className="whitespace-nowrap px-6 py-4">{item.sensor_k}</td>
+        <td className="whitespace-nowrap px-6 py-4">{item.sensor_n}</td>
+        <td className="whitespace-nowrap px-6 py-4">{item.sensor_kelembaban}</td>
+        <td className="whitespace-nowrap px-6 py-4">{item.timestamp}</td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td className="px-6 py-4" colSpan="8">
+        Data Kosong
+      </td>
+    </tr>
+  )}
+</tbody>
+
             </table>
           </div>
         </div>

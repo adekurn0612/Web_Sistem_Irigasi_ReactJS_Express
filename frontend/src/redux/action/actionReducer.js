@@ -345,3 +345,32 @@ export const resDataBaruLahanEmpat=(payload)=>{
         payload
     }
 }
+
+export const reqdelete=()=>{
+    return{
+        type : ActionType.DELETE_DATA
+    }
+}
+
+export const resdelete=(payload)=>{
+    return{
+        type : ActionType.DELETE_DATA_RESPONSE,
+        payload
+    }
+}
+
+export const reqExcel = (awal, akhir) => {
+    return {
+        type: ActionType.EXCEL,
+        payload: { awal, akhir }
+    };
+};
+
+
+
+export const resExcel=(payload)=>{
+    return{
+        type : ActionType.EXCEL_RESPONSE,
+        payload
+    }
+}

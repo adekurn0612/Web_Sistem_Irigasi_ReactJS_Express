@@ -196,7 +196,18 @@ const databaruLahanEmpat=()=>{
     return axios.get('dataBaruLahanEmpat')
 }
 
+const deleteData=(data)=>{
+    return axios.delete('delete-data')
+}
+
+const downloadExcel=(data)=>{
+    console.log("api",data);
+    return axios.get(`download-excel?awal=${data.awal}&akhir=${data.akhir}`)
+}
+
 export default  {
+    downloadExcel,
+    deleteData,
     getallData,
     dataKaliumLahanSatu,
     dataKaliumLahanDuaBaru,

@@ -6,6 +6,9 @@ import lahanTigaController from "../controller/lahanTigaController.js";
 import lahanEmpatController from "../controller/lahanEmpatController.js";
 import loginController from "../controller/loginController.js";
 import dataBaru from "../controller/dataBaru.js";
+import deleteController from "../controller/deleteController.js"
+import excellController from "../controller/excellController.js";
+// import excellController from "../controller/excellController.js";
 
 const router = Router();
 
@@ -15,6 +18,12 @@ router.get("/data" , dataControllerAll.getlAll);
 //user
 router.post("/user/createUser" , loginController.createUser)
 router.post("/user/login" , loginController.login)
+
+//delete
+router.delete("/delete-data" , deleteController.deleteData)
+
+//download
+router.get("/download-excel" , excellController.excelDownload)
 
 //lahan 1
 router.get("/data/lahanSatu/dataKalium" , lahanSatuController.dataKalium);

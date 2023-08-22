@@ -7,6 +7,8 @@ import { handleGetDataLahanTigaKalium, handleGetDataLahanTigaNitrogen, handleGet
 import { handleGetDataLahanEmpatKalium, handleGetDataLahanEmpatKelembapan, handleGetDataLahanEmpatNitrogen, handleGetDataLahanEmpatPh, handleGetDataLahanEmpatPotasium } from './dataLahanEmpatSaga';
 import { handleGetDatabaruLahanDua, handleGetDatabaruLahanEmpat, handleGetDatabaruLahanSatu, handleGetDatabaruLahanTiga } from './dataBaruSaga';
 import { handleLogin } from './loginSaga';
+import { handleexcel } from './excel';
+import { handledelete } from './delete';
 
 
 function* watchAll(){
@@ -45,6 +47,12 @@ function* watchAll(){
         takeEvery(ActionType.DATA_BARU_LAHAN_EMPAT,handleGetDatabaruLahanEmpat),
 
         takeEvery(ActionType.LOGIN,handleLogin),
+
+        //download excel
+        takeEvery(ActionType.EXCEL , handleexcel),
+
+        //delete
+        takeEvery(ActionType.DELETE_DATA,handledelete),
     ])
 }
 
